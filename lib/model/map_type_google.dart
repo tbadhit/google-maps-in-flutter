@@ -1,5 +1,5 @@
 class MapTypeGoogle {
-  String title;
+  String? title;
 
   MapTypeGoogle({this.title});
 }

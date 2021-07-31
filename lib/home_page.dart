@@ -45,22 +45,26 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 50,
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Map1()));
+                            MaterialPageRoute(builder: (context) {
+                          return Map1();
+                        }));
                       },
-                      color: Colors.red,
+                      style: ElevatedButton.styleFrom(primary: Colors.red),
                       child: Text(
                         'Google Maps v1',
                         style: TextStyle(color: Colors.white),
                       )),
-                  RaisedButton(
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Map2()));
+                            MaterialPageRoute(builder: (context) {
+                          return Map2();
+                        }));
                       },
-                      color: Colors.blue,
+                      style: ElevatedButton.styleFrom(primary: Colors.blue),
                       child: Text(
                         'Google Maps v2',
                         style: TextStyle(color: Colors.white),

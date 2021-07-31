@@ -14,12 +14,12 @@ class Map2 extends StatefulWidget {
 class _Map2State extends State<Map2> {
   Set<Marker> marker = {};
   MapType mapType = MapType.normal;
-  GoogleMapController controller;
+  late GoogleMapController controller;
   double latitude = -6.1952988;
   double longitude = 106.7926625;
-  Position userLocation;
-  LatLng lastMapPosition;
-  String address;
+  Position? userLocation;
+  late LatLng lastMapPosition;
+  late String address;
 
   List<MapTypeGoogle> googleMapsTypes = <MapTypeGoogle>[
     MapTypeGoogle(title: 'Normal'),
@@ -70,7 +70,7 @@ class _Map2State extends State<Map2> {
             itemBuilder: (BuildContext context) {
               return googleMapsTypes.map((tipeMap) {
                 return PopupMenuItem(
-                  child: Text(tipeMap.title),
+                  child: Text(tipeMap.title!),
                   value: tipeMap,
                 );
               }).toList();
@@ -113,7 +113,6 @@ class _Map2State extends State<Map2> {
                             contentPadding: EdgeInsets.only(top: 15, left: 15),
                             suffixIcon: IconButton(
                               icon: Icon(Icons.search),
-                              // TODO:
                               onPressed: () {
                                 searchAddress();
                               },
@@ -127,7 +126,7 @@ class _Map2State extends State<Map2> {
                     ),
 
                     // Create button
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         getLocation().then((value) {
                           setState(() {
@@ -135,8 +134,8 @@ class _Map2State extends State<Map2> {
                           });
                           controller.animateCamera(
                               CameraUpdate.newCameraPosition(CameraPosition(
-                                  target: LatLng(userLocation.latitude,
-                                      userLocation.longitude),
+                                  target: LatLng(userLocation!.latitude,
+                                      userLocation!.longitude),
                                   zoom: 17)));
                         });
                       },
@@ -148,7 +147,7 @@ class _Map2State extends State<Map2> {
                     userLocation == null
                         ? Text('Lokasi belum terdeteksi')
                         : Text(resultLocation(
-                            userLocation.latitude, userLocation.longitude))
+                            userLocation!.latitude, userLocation!.longitude))
                   ],
                 ),
               ),
@@ -161,7 +160,6 @@ class _Map2State extends State<Map2> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getLocation();
     // Permission
@@ -181,7 +179,7 @@ class _Map2State extends State<Map2> {
   }
 
   // Untuk mendapatkan lokasi device saat ini :
-  Future<Position> getLocation() async {
+  Future<Position?> getLocation() async {
     var currentLocation;
     try {
       currentLocation = await Geolocator.getCurrentPosition(
@@ -206,9 +204,9 @@ class _Map2State extends State<Map2> {
     });
 
     return 'My Location: ' +
-        userLocation.latitude.toString() +
+        userLocation!.latitude.toString() +
         ',' +
-        userLocation.longitude.toString();
+        userLocation!.longitude.toString();
   }
 
   // Untuk mencari alamat :

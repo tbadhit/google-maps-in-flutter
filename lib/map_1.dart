@@ -63,7 +63,7 @@ class _Map1State extends State<Map1> {
             itemBuilder: (BuildContext context) {
               return googleMapsTypes.map((tipeMap) {
                 return PopupMenuItem(
-                  child: Text(tipeMap.title),
+                  child: Text(tipeMap.title!),
                   value: tipeMap,
                 );
               }).toList();
